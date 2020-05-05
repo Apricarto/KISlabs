@@ -1,0 +1,17 @@
+{
+  "name": "Arthur",
+  "version": "1.0.0",
+  "description": "Aviasales API",
+  "main": "index.js",
+  "repository": "https://github.com/Apricarto/KIS",
+  "author": "Arthur",
+  "license": "MIT",
+  "dependencies": {
+    "@redocly/openapi-cli": "^0.12.5"
+  },
+  "scripts": {
+    "start": "openapi preview-docs",
+    "build": "openapi bundle -o dist",
+    "test": "openapi validate"
+  }
+}

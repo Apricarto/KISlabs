@@ -1,0 +1,17 @@
+type: object
+required:
+  - name
+  - GMT
+properties:
+  id:
+    description: Airplane identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  name:
+    description: Name of the city
+    type: string
+    maxLength: 255
+  GMT:
+    description: City Time Zone
+    type: integer

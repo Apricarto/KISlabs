@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Рейсы
+  summary: Получить информацию о рейсах
+  operationId: GetFlights
+  description: |
+    Получить информацию о рейсах
+  responses:
+    '200':
+      description: Информация о рейсах была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Flight.yaml
+    '401':
+      description: Отказано в доступе
+# post:
+#   tags:
+#     - Рейсы
+#   summary: Добавить новый рейс
+#   operationId: PostFlight
+#   description: |
+#     Добавить новый рейс
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/Flight.yaml
+#   responses:
+#     '200':
+#       description: Рейс был успешно добавлен
+#       content:
+#         application/json:
+#           schema:
+#             $ref: ../components/schemas/Flight.yaml
+#     '401':
+#       description: Отказано в доступе
+#     '422':
+#       description: Неверные данные

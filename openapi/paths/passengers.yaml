@@ -1,0 +1,82 @@
+get:
+  tags:
+    - Пассажиры
+  summary: Получить информацию о пассажирах для поиска билетов
+  operationId: GetPassengers
+  description: |
+    Получить информацию о пассажирах для поиска билетов
+  responses:
+    '200':
+      description: Информация о пассажирах была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Passenger.yaml
+    '401':
+      description: Отказано в доступе
+post:
+  tags:
+    - Пассажиры
+  summary: Добавить нового пассажира в поиск
+  operationId: PostPassenger
+  description: |
+    Добавить нового пассажира в поиск
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Passenger.yaml
+  responses:
+    '200':
+      description: Пассажир был успешно добавлен
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Passenger.yaml
+    '401':
+      description: Отказано в доступе
+    '422':
+      description: Неверные данные
+put:
+  tags:
+    - Пассажиры
+  summary: Добавить или изменить пассажиров в поиске
+  operationId: PutPassenger
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Passenger.yaml
+  responses:
+    '201':
+      description: Пассажир был добавлен
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Passenger.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+    '409':
+      description: Пассажир уже добавлен или не может быть обновлен
+    '422':
+      description: Неверные данные
+delete:
+  tags:
+    - Пассажиры
+  summary: Удалить пассажира из поиска
+  operationId: DeletePassenger
+  description: |
+    Удалить пассажира
+  responses:
+    '204':
+      description: Пассажир было удалено
+    '401':
+      description: Отказано в доступе
+    '402':
+      description: Не можеть быть удален
+    '404':
+      description: Не найдено

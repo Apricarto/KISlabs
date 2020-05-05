@@ -1,0 +1,20 @@
+get:
+  tags:
+    - Билеты
+  summary: Получить пассажиров выбранных для покупки билетов
+  operationId: GetPassengersById
+  description: |
+    Получить пассажиров выбранных для покупки билетов
+  responses:
+    '200':
+      description: Информация о пассажирах выбранных для покупки билетов успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Passenger.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено

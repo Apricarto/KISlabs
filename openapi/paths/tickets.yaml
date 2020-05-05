@@ -1,0 +1,39 @@
+get:
+  tags:
+    - Билеты
+  summary: Получить информацию о поиске билетов
+  operationId: GetTickets
+  description: |
+    Получить информацию о билетах
+  responses:
+    '200':
+      description: Информация о билетах была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Ticket.yaml
+    '401':
+      description: Отказано в доступе
+put:
+  tags:
+    - Билеты
+  summary: Изменить информацию о поиске билетов
+  operationId: PutTicket
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Ticket.yaml
+  responses:
+    '201':
+      description: Билет изменен
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Ticket.yaml
+    '401':
+      description: Отказано в доступе
+    '422':
+      description: Неверные данные

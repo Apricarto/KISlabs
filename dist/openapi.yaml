@@ -1,0 +1,495 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Aviasales API
+  contact:
+    name: Артур
+    email: apricart@mail.ru
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: Билет
+    description: |
+      В этом разделе вы можете получить информацию
+      о параметрах поиска авиабилетов, а также
+      изменить или удалить информацию о них.
+  - name: Пассажир
+    description: |
+      В этом разделе вы можете получить информацию
+      о количестве и типе пассажиров для поиска билетов, 
+      а также изменить или удалить информацию о них.
+  - name: Рейс
+    description: |
+      В этом разделе вы можете получить информацию
+      о всех рейсах или о конкретном.
+  - name: Города
+    description: |
+      В этом разделе вы можете получить информацию
+      о всех городах или о конкретном.
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /passengers:
+    get:
+      tags:
+        - Пассажир
+      summary: Получить информацию о пассажирах
+      operationId: GetPassengers
+      description: |
+        Получить информацию о пассажирах
+      responses:
+        '200':
+          description: Информация о пассажирах была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Passenger'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Пассажир
+      summary: Добавить нового пассажира
+      operationId: PostPassenger
+      description: |
+        Добавить нового пассажира
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Passenger'
+      responses:
+        '200':
+          description: Пассажир был успешно добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passenger'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+    put:
+      tags:
+        - Пассажир
+      summary: Добавить или изменить пассажиров
+      operationId: PutPassenger
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Passenger'
+      responses:
+        '201':
+          description: Пассажир было добавлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passenger'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '409':
+          description: Пассажир уже добавлен или не может быть обновлен
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Пассажир
+      summary: Удалить пассажира
+      operationId: DeletePassenger
+      description: |
+        Удалить пассажира
+      responses:
+        '204':
+          description: Пассажир было удалено
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не можеть быть удален
+        '404':
+          description: Не найдено
+  /cities:
+    get:
+      tags:
+        - Города
+      summary: Получить информацию о городах
+      operationId: GetCities
+      description: |
+        Получить информацию о городах
+      responses:
+        '200':
+          description: Информация о городах была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+        '401':
+          description: Отказано в доступе
+  /ticket:
+    get:
+      tags:
+        - Билет
+      summary: Получить информацию о билетах
+      operationId: GetTickets
+      description: |
+        Получить информацию о билетах
+      responses:
+        '200':
+          description: Информация о билетах была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticket'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Билет
+      summary: Добавить новый билет
+      operationId: PostTicket
+      description: |
+        Добавить новый билет
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+      responses:
+        '200':
+          description: Билет был успешно добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  /flights:
+    get:
+      tags:
+        - Рейсы
+      summary: Получить информацию о рейсах
+      operationId: GetFlights
+      description: |
+        Получить информацию о рейсах
+      responses:
+        '200':
+          description: Информация о рейсах была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Рейсы
+      summary: Добавить новый рейс
+      operationId: PostFlight
+      description: |
+        Добавить новый рейс
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '200':
+          description: Рейс был успешно добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/city/{id}':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    get:
+      tags:
+        - Города
+      summary: Получить город по ID
+      operationId: GetCity
+      description: |
+        Получить город по ID
+      responses:
+        '200':
+          description: Город успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+  '/flight/{id}':
+    get:
+      tags:
+        - Рейс
+      summary: Получить рейс по ID
+      operationId: GetFlight
+      description: |
+        Получить информацию о рейсе по ID
+      responses:
+        '200':
+          description: Информация о рейсе успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    put:
+      tags:
+        - Рейс
+      summary: Добавить или изменить рейс по ID
+      operationId: PutMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '201':
+          description: Рейс добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '409':
+          description: Рейс существует и не может быть добавлен
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Рейс
+      summary: Удалить рейс по ID
+      operationId: DeleteFlight
+      description: |
+        Удалить рейс по ID
+      responses:
+        '204':
+          description: Рейс был удален
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не может быть удален
+        '404':
+          description: Не найдено
+  '/city-flights/{cityId}':
+    get:
+      tags:
+        - Город
+      summary: Получить рейсы по ID города
+      operationId: GetFlightsByCitiesId
+      description: |
+        Получить рейсы по ID города
+      responses:
+        '200':
+          description: Информация о рейсах выбранного города получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+  '/tickets-passengers/{ticketId}':
+    get:
+      tags:
+        - Билет
+      summary: Получить пассажиров выбранных для покупки билетов
+      operationId: GetPassengersById
+      description: |
+        Получить пассажиров выбранных для покупки билетов
+      responses:
+        '200':
+          description: >-
+            Информация о пассажирах выбранных для покупки билетов успешно
+            получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Passenger'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+  '/tickets-flights/{ticketId}':
+    get:
+      tags:
+        - Билеты
+      summary: Получить рейсы по настройкам поиска билетов
+      operationId: GetFlightsByTicketId
+      description: |
+        Получить рейсы по настройкам поиска билетов
+      responses:
+        '200':
+          description: Информация о рейсах успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+components:
+  schemas:
+    Passenger:
+      type: object
+      required:
+        - amountOfAdults
+        - amountOfChildren
+        - amountOfBabies
+        - ticketType
+      properties:
+        amountOfAdults:
+          description: Amount of adults
+          type: integer
+        amountOfChildren:
+          description: Amount of children
+          type: integer
+        amountOfBabies:
+          description: Amount of babies
+          type: integer
+        ticketType:
+          description: Type of the ticket
+          type: string
+    ResourceId:
+      type: string
+      description: The resource ID. Defaults to UUID v4
+      maxLength: 50
+      example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+    City:
+      type: object
+      required:
+        - name
+        - GMT
+      properties:
+        id:
+          description: Airplane identifier string
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+        name:
+          description: Name of the city
+          type: string
+          maxLength: 255
+        GMT:
+          description: City Time Zone
+          type: integer
+    Ticket:
+      type: object
+      required:
+        - departureCity
+        - arrivalCity
+        - departureDate
+        - passengers
+      properties:
+        id:
+          description: Airplane identifier string
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+        departureCity:
+          description: City from which the plane leaves
+          allOf:
+            - $ref: '#/components/schemas/City'
+        arrivalCity:
+          description: The city in which the plane arrives
+          allOf:
+            - $ref: '#/components/schemas/City'
+        departureDate:
+          description: Aircraft departure date
+          type: string
+        arriveDate:
+          description: Aircraft arrival date
+          type: string
+        passengers:
+          description: Ticket User Information
+          allOf:
+            - $ref: '#/components/schemas/Passenger'
+    Flight:
+      type: object
+      required:
+        - numberOfTickets
+        - departureCity
+        - arrivalCity
+        - departureDate
+        - arrivalDate
+        - price
+        - priceWithBaggage
+        - baggage
+        - refound
+      properties:
+        id:
+          description: The flight identifier string
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+        deapartureCity:
+          description: Departure city
+          allOf:
+            - $ref: '#/components/schemas/City'
+        arrivalCity:
+          description: Arrival city
+          allOf:
+            - $ref: '#/components/schemas/City'
+        departureDate:
+          description: Date of departure
+          type: string
+        arrivalDate:
+          description: Date of arrival
+          type: string
+        price:
+          description: Price of the ticket
+          type: integer
+        priceWithBaggage:
+          description: Price of the ticket with baggage
+          type: integer
+        baggage:
+          description: How many kilograms can baggage weigh
+          type: integer
+        refound:
+          description: Is it possible to return a ticket
+          type: boolean
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      description: The resource identifier string
+      required: true
+      schema:
+        type: string
+        maxLength: 50
+        pattern: '^[@~\-\.\w]+$'

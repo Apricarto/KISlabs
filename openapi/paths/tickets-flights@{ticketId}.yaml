@@ -1,0 +1,20 @@
+get:
+  tags:
+    - Рейсы
+  summary: Получить рейсы по настройкам поиска билетов
+  operationId: GetFlightsByTicketId
+  description: |
+    Получить рейсы по настройкам поиска билетов
+  responses:
+    '200':
+      description: Информация о рейсах успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Flight.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено

@@ -1,0 +1,44 @@
+type: object
+required:
+  - numberOfTickets
+  - departureCity
+  - arrivalCity
+  - departureDate
+  - arrivalDate
+  - price
+  - priceWithBaggage
+  - baggage
+  - refound
+
+properties:
+  id:
+    description: The flight identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  deapartureCity:
+    description: Departure city
+    allOf:
+      - $ref: ./City.yaml
+  arrivalCity:
+    description: Arrival city
+    allOf:
+      - $ref: ./City.yaml
+  departureDate:
+    description: Date of departure
+    type: string
+  arrivalDate:
+    description: Date of arrival
+    type: string
+  price:
+    description: Price of the ticket
+    type: integer
+  priceWithBaggage:
+    description: Price of the ticket with baggage
+    type: integer
+  baggage:
+    description: How many kilograms can baggage weigh
+    type: integer
+  refound:
+    description: Is it possible to return a ticket
+    type: boolean

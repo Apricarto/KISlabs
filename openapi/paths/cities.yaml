@@ -1,0 +1,18 @@
+get:
+  tags:
+    - Города
+  summary: Получить информацию о городах
+  operationId: GetCities
+  description: |
+    Получить информацию о городах
+  responses:
+    '200':
+      description: Информация о городах была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/City.yaml
+    '401':
+      description: Отказано в доступе

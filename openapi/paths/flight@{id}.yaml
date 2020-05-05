@@ -1,0 +1,59 @@
+get:
+  tags:
+    - Рейсы
+  summary: Получить рейс по ID
+  operationId: GetFlight
+  description: |
+    Получить информацию о рейсе по ID
+  responses:
+    '200':
+      description: Информация о рейсе успешно получена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Flight.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+# put:
+#   tags:
+#     - Рейсы
+#   summary: Добавить или изменить рейс по ID
+#   operationId: PutFlight
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/Flight.yaml
+#   responses:
+#     '201':
+#       description: Рейс добавлен
+#       content:
+#         application/json:
+#           schema:
+#             $ref: ../components/schemas/Flight.yaml
+#     '401':
+#       description: Отказано в доступе
+#     '404':
+#       description: Не найдено
+#     '409':
+#       description: Рейс существует и не может быть добавлен
+#     '422':
+#       description: Неверные данные
+# delete:
+#   tags:
+#     - Рейсы
+#   summary: Удалить рейс по ID
+#   operationId: DeleteFlight
+#   description: |
+#     Удалить рейс по ID
+#   responses:
+#     '204':
+#       description: Рейс был удален
+#     '401':
+#       description: Отказано в доступе
+#     '402':
+#       description: Не может быть удален
+#     '404':
+#       description: Не найдено

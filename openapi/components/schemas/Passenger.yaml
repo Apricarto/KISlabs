@@ -1,0 +1,19 @@
+type: object
+required:
+  - amountOfAdults
+  - amountOfChildren
+  - amountOfBabies
+  - ticketType
+properties:
+  amountOfAdults:
+    description: Amount of adults
+    type: integer
+  amountOfChildren:
+    description: Amount of children
+    type: integer
+  amountOfBabies:
+    description: Amount of babies
+    type: integer
+  ticketType:
+    description: Type of the ticket
+    type: string

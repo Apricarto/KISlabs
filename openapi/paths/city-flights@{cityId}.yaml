@@ -1,0 +1,20 @@
+get:
+  tags:
+    - Рейсы
+  summary: Получить рейсы по ID города
+  operationId: GetFlightsByCitiesId
+  description: |
+    Получить рейсы по ID города
+  responses:
+    '200':
+      description: Информация о рейсах выбранного города получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Flight.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено

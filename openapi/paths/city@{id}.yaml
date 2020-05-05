@@ -1,0 +1,20 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  tags:
+    - Города
+  summary: Получить город по ID
+  operationId: GetCity
+  description: |
+    Получить город по ID
+  responses:
+    '200':
+      description: Город успешно получен
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/City.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено

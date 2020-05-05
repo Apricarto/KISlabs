@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Aviasales API
+  contact:
+    name: Артур
+    email: apricart@mail.ru
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: Билеты
+    description: |
+        В этом разделе вы можете получить информацию
+        о параметрах поиска авиабилетов, а также
+        изменить или удалить информацию о них.
+  - name: Пассажиры
+    description: |
+        В этом разделе вы можете получить информацию
+        о количестве и типе пассажиров для поиска билетов, 
+        а также изменить или удалить информацию о них.
+  - name: Рейсы
+    description: |
+        В этом разделе вы можете получить информацию
+        о всех рейсах или о конкретном.
+  - name: Города
+    description: |
+        В этом разделе вы можете получить информацию
+        о всех городах или о конкретном.
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /passengers:
+    $ref: './paths/passengers.yaml'
+  /cities:
+    $ref: './paths/cities.yaml'
+  /ticket:
+    $ref: './paths/tickets.yaml'
+  /flights:
+    $ref: './paths/flights.yaml'
+  /city/{id}:
+    $ref: './paths/city@{id}.yaml'
+  /flight/{id}:
+    $ref: './paths/flight@{id}.yaml'
+  /city-flights/{cityId}:
+    $ref: './paths/city-flights@{cityId}.yaml'
+  /tickets-passengers/{ticketId}:
+    $ref: './paths/tickets-passengers@{ticketId}.yaml'
+  /tickets-flights/{ticketId}:
+    $ref: './paths/tickets-flights@{ticketId}.yaml'

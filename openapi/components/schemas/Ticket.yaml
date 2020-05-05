@@ -1,0 +1,30 @@
+type: object
+required:
+  - departureCity
+  - arrivalCity
+  - departureDate
+  - passengers
+properties:
+  id:
+    description: Airplane identifier string
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  departureCity:
+    description: City from which the plane leaves
+    allOf:
+      - $ref: ./City.yaml
+  arrivalCity:
+    description: The city in which the plane arrives
+    allOf:
+      - $ref: ./City.yaml
+  departureDate:
+    description: Aircraft departure date
+    type: string
+  arriveDate:
+    description: Aircraft arrival date
+    type: string
+  passengers:
+    description: Ticket User Information
+    allOf:
+      - $ref: ./Passenger.yaml
